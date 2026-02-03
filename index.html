@@ -1,1 +1,330 @@
+<!DOCTYPE html>
+<html lang="eu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Denborazko Perpausak</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{min-height:100vh;background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);font-family:'Segoe UI',system-ui,sans-serif;color:#e8e8e8;padding:15px}
+#app{max-width:850px;margin:0 auto}
+h1{font-size:2.2rem;font-weight:800;background:linear-gradient(90deg,#f39c12,#e74c3c,#9b59b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;margin-bottom:8px}
+.sub{text-align:center;color:#a0a0a0;margin-bottom:25px;font-size:1.05rem}
+.card{background:rgba(255,255,255,0.03);border-radius:18px;padding:25px;margin-bottom:20px;border:1px solid rgba(255,255,255,0.08)}
+.badge{display:inline-block;padding:5px 13px;border-radius:18px;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;color:#fff}
+.b-nean{background:linear-gradient(135deg,#3498db,#2980b9)}
+.b-la{background:linear-gradient(135deg,#9b59b6,#8e44ad)}
+.b-part{background:linear-gradient(135deg,#2ecc71,#27ae60)}
+.b-bit{background:linear-gradient(135deg,#e67e22,#d35400)}
+.b-gen{background:linear-gradient(135deg,#e74c3c,#c0392b)}
+.q{font-size:1.12rem;line-height:1.7;margin-bottom:18px}
+.blank{border-bottom:3px dashed #f39c12;padding:2px 8px;color:#f39c12;font-weight:600}
+input[type=text]{width:100%;padding:13px 18px;font-size:1.05rem;border:2px solid rgba(255,255,255,0.1);border-radius:11px;background:rgba(0,0,0,0.3);color:#fff;outline:none;margin-bottom:12px;transition:.3s}
+input:focus{border-color:#f39c12;box-shadow:0 0 18px rgba(243,156,18,0.2)}
+input:disabled{opacity:.5}
+.brow{display:flex;gap:12px;flex-wrap:wrap}
+.btn{padding:11px 24px;border:none;border-radius:10px;font-size:.95rem;font-weight:600;cursor:pointer;transition:.3s}
+.btn:hover{transform:translateY(-2px)}
+.btn-p{background:linear-gradient(135deg,#f39c12,#e67e22);color:#fff}
+.btn-s{background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.2)}
+.btn-g{background:linear-gradient(135deg,#2ecc71,#27ae60);color:#fff}
+.btn:disabled{opacity:.4;cursor:default;transform:none}
+.nav{display:flex;justify-content:center;gap:12px;margin-bottom:25px;flex-wrap:wrap}
+.nav .btn{padding:10px 20px;border-radius:25px;text-transform:uppercase;letter-spacing:1px;font-size:.85rem}
+.nav .on{background:linear-gradient(135deg,#f39c12,#e74c3c);color:#fff;box-shadow:0 4px 18px rgba(243,156,18,0.35)}
+.pbar{width:100%;height:7px;background:rgba(255,255,255,0.1);border-radius:10px;overflow:hidden;margin-bottom:25px}
+.pfill{height:100%;background:linear-gradient(90deg,#f39c12,#e74c3c);transition:width .4s}
+.fb{padding:18px;border-radius:11px;margin-top:16px;font-size:.95rem;line-height:1.6}
+.fb-ok{background:rgba(46,204,113,0.13);border:1px solid rgba(46,204,113,0.3);color:#2ecc71}
+.fb-no{background:rgba(231,76,60,0.13);border:1px solid rgba(231,76,60,0.3);color:#e74c3c}
+.help{background:rgba(52,152,219,0.1);border:1px solid rgba(52,152,219,0.3);border-radius:10px;padding:13px;margin-top:13px;font-size:.88rem;color:#3498db;display:none}
+.help.show{display:block}
+.sn{font-size:3.5rem;font-weight:800;background:linear-gradient(90deg,#f39c12,#e74c3c);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.ei{padding:10px 14px;border-radius:8px;margin-bottom:6px;font-size:.9rem;display:flex;gap:10px}
+.ei-ok{background:rgba(46,204,113,0.08);border-left:3px solid #2ecc71}
+.ei-no{background:rgba(231,76,60,0.08);border-left:3px solid #e74c3c}
+.strike{text-decoration:line-through;color:#888;font-style:italic}
+table{width:100%;border-collapse:separate;border-spacing:0}
+th{background:rgba(243,156,18,0.18);padding:10px 12px;text-align:left;font-weight:700;font-size:.82rem;text-transform:uppercase;letter-spacing:1px;border-bottom:2px solid rgba(243,156,18,0.25)}
+td{padding:9px 12px;border-bottom:1px solid rgba(255,255,255,0.04);font-size:.88rem}
+.tsec{margin-bottom:20px}
+.tsec h3{color:#f39c12;margin-bottom:8px;font-size:1rem}
+.rbox{background:rgba(243,156,18,0.08);border:1px solid rgba(243,156,18,0.25);border-radius:10px;padding:14px;margin-top:18px;color:#f39c12;font-size:.9rem;line-height:1.7}
+.ebox{background:rgba(231,76,60,0.08);border:1px solid rgba(231,76,60,0.25);border-radius:12px;padding:18px;margin-bottom:15px}
+.ebox h4{color:#e74c3c;margin-bottom:8px}
+.ebox .rl{color:#3498db;font-size:.86rem;margin-bottom:10px;padding:8px;background:rgba(52,152,219,0.1);border-radius:6px}
+.ebox .mk{color:#a0a0a0;font-size:.86rem;margin-bottom:4px}
+.obox{background:rgba(46,204,113,0.08);border:1px solid rgba(46,204,113,0.25);border-radius:12px;padding:18px;margin-bottom:15px;color:#2ecc71}
+.ctr{text-align:center}
+.emoji{font-size:3rem;margin-bottom:15px}
+.prev-wrong{color:#e74c3c;font-size:.88rem;margin-bottom:10px;padding:8px;background:rgba(231,76,60,0.08);border-radius:6px}
+@media(max-width:600px){h1{font-size:1.6rem}.card{padding:16px}.btn{padding:9px 16px;font-size:.85rem}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script src="data.js"></script>
+<script>
+// === STATE ===
+let S={scr:'sarrera',tipo:'',ex:[],idx:0,ans:'',fb:null,helpOn:false,
+  res:[],corr:[],ci:0,ca:{},cres:[],allRes:[]};
 
+const $=s=>document.getElementById(s), A=()=>$('app');
+function shuf(a){let c=[...a];for(let i=c.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[c[i],c[j]]=[c[j],c[i]]}return c}
+function norm(t){return t.toLowerCase().trim().replace(/\s+/g,' ').replace(/[.,;:!?¿¡]/g,'').replace(/\u00AD/g,'').normalize('NFD').replace(/[\u0300-\u036f]/g,'')}
+function bc(m){
+  if(m.includes('nean'))return'b-nean';
+  if(m.includes('(e)la')||m.includes('↔'))return'b-la';
+  if(['baino lehen','baino arinago','eta gero','ostean','orduko'].some(x=>m.includes(x)))return'b-part';
+  if(m.includes('bitartean'))return'b-bit';
+  return'b-gen';
+}
+
+function R(){
+  let f={sarrera:rS,fusioa:rE,zuzendu:rE,taula:rT,emaitzak:rM,zuzenketa:rC,txostena:rX};
+  (f[S.scr]||rS)();window.scrollTo(0,0);
+}
+
+// === SARRERA ===
+function rS(){
+  A().innerHTML=`<h1>Denborazko Perpausak</h1><p class="sub">Eskira joango gara Pirinioetara! ⛷️🏔️</p>
+  <div class="card ctr"><div class="emoji">⛷️ 🏔️ ❄️</div>
+  <h2 style="font-size:1.6rem;margin-bottom:18px">Pirinioetara eskira!</h2>
+  <p style="color:#a0a0a0;line-height:1.7;margin-bottom:25px">Denborazko menderagailuak landuko ditugu:
+  <b style="color:#3498db">-(e)nean</b>, <b style="color:#9b59b6">-(e)la</b>,
+  <b style="color:#2ecc71">baino lehen / eta gero / ostean / orduko</b>,
+  <b style="color:#e67e22">bitartean</b> eta <b style="color:#e74c3c">ondoren / aurretik</b>.</p>
+  <div class="brow" style="justify-content:center">
+    <button class="btn btn-p" style="padding:14px 35px;font-size:1.05rem" onclick="go('fusioa')">🚀 Fusioa</button>
+    <button class="btn btn-s" onclick="go('zuzendu')">✏️ Zuzendu esaldia</button>
+  </div>
+  <div style="margin-top:15px"><button class="btn btn-s" onclick="S.scr='taula';R()">📋 Fusio-taula</button></div></div>
+  <div class="card"><div class="rbox"><b>📌 Arau nagusiak:</b><br><br>
+  <b>-(e)nean:</b> aditz perifrastikoak (burutua/burutugabea/etorkizuna)<br>
+  <b>-(e)la:</b> aditz trinkoak + ari izan (puntukaria)<br>
+  <b>baino lehen, eta gero, ostean, orduko, baino arinago:</b> partizipioa bakarrik<br>
+  <b>bitartean:</b> -(e)n + laguntzailea + bitartean<br>
+  <b>ondoren / aurretik:</b> izena + -(r)en (genitiboa), edo aditza zuzenean</div></div>`;
+}
+
+function go(t){
+  S.tipo=t;S.scr=t;S.ex=shuf(t==='fusioa'?[...FUSIOA]:[...ZUZENDU]);
+  S.idx=0;S.ans='';S.fb=null;S.helpOn=false;S.res=[];R();
+}
+
+// === ARIKETAK ===
+function rE(){
+  let e=S.ex[S.idx],pr=S.idx/S.ex.length*100,isF=S.tipo==='fusioa';
+  let nav=`<div class="nav">
+    <button class="btn ${S.tipo==='fusioa'?'on':'btn-s'}" onclick="go('fusioa')">Fusioa</button>
+    <button class="btn ${S.tipo==='zuzendu'?'on':'btn-s'}" onclick="go('zuzendu')">Zuzendu</button>
+    <button class="btn btn-s" onclick="S.scr='taula';R()">📋 Taula</button></div>`;
+  let qH;
+  if(isF){let p=e.p.split('_____');qH=`<p class="q">${p[0]}<span class="blank">${esc(S.ans)||'?'}</span>${p[1]||''}</p>`}
+  else{qH=`<p class="q"><b>❌ Esaldi okerra:</b><br><span style="color:#e74c3c;font-size:1.12rem">${e.tx}</span></p>
+  <p style="color:#a0a0a0;font-size:.88rem;margin-bottom:14px">Idatzi esaldi zuzena:</p>`}
+  let fbH=S.fb?`<div class="fb ${S.fb.ok?'fb-ok':'fb-no'}"><b>${S.fb.msg}</b><br><span style="opacity:.8;font-size:.88rem">${e.l}</span></div>`:'';
+  let hlp=`<div class="help ${S.helpOn&&!S.fb?'show':''}">💡 ${e.l}</div>`;
+  let bH;
+  if(!S.fb){bH=`<div class="brow"><button class="btn btn-p" onclick="chk()" ${!S.ans.trim()?'disabled':''}>✓ Egiaztatu</button>
+    <button class="btn btn-s" onclick="tglH()">💡 Laguntza</button></div>`}
+  else{let lb=S.idx<S.ex.length-1?'→ Hurrengoa':'🏁 Amaitu';
+    bH=`<div class="brow"><button class="btn btn-p" onclick="nxt()">${lb}</button></div>`}
+  A().innerHTML=`<h1>${isF?'Fusioa':'Zuzendu esaldia'}</h1>
+  <p class="sub">Ariketa ${S.idx+1} / ${S.ex.length}</p>${nav}
+  <div class="pbar"><div class="pfill" style="width:${pr}%"></div></div>
+  <div class="card"><span class="badge ${bc(e.m)}">${e.m}</span>${qH}
+  <input type="text" id="ai" value="${esc(S.ans)}" oninput="oI(this)" onkeydown="oK(event)" placeholder="${isF?'Idatzi fusioa...':'Idatzi esaldi zuzena...'}" ${S.fb?'disabled':''}>
+  ${bH}${hlp}${fbH}</div>
+  <p class="ctr" style="color:#666;margin-top:15px">Puntuazioa: ${S.res.filter(r=>r.ok).length}/${S.res.length}</p>`;
+  if(!S.fb){let i=$('ai');if(i)i.focus()}
+}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;')}
+function oI(el){S.ans=el.value;let b=document.querySelector('.blank');if(b)b.textContent=S.ans||'?';
+  let bt=document.querySelector('.btn-p');if(bt&&!S.fb)bt.disabled=!S.ans.trim()}
+function oK(ev){if(ev.key==='Enter'&&!S.fb&&S.ans.trim())chk()}
+function tglH(){S.helpOn=!S.helpOn;let h=document.querySelector('.help');if(h)h.classList.toggle('show')}
+
+function chk(){
+  if(!S.ans.trim()||S.fb)return;
+  let e=S.ex[S.idx],cor=S.tipo==='fusioa'?e.e:e.ok,ok=norm(S.ans)===norm(cor);
+  S.fb={ok,msg:ok?'🎉 Bikain! Ondo egin duzu!':`❌ Ez da zuzena. Erantzun zuzena: "${cor}"`};
+  S.res.push({ex:e,given:S.ans,correct:cor,ok,k:e.k});R();
+}
+function nxt(){
+  if(S.idx<S.ex.length-1){S.idx++;S.ans='';S.fb=null;S.helpOn=false;R()}
+  else{S.allRes=[...S.res];S.scr='emaitzak';R()}
+}
+
+// === EMAITZAK ===
+function rM(){
+  let t=S.res.length,ok=S.res.filter(r=>r.ok).length,p=t?Math.round(ok/t*100):0;
+  let em=p>=90?'🏆':p>=70?'👍':p>=50?'💪':'📚';
+  let ms=p>=90?'Bikain! Menderagailuak menperatuta!':p>=70?'Oso ondo! Baina erreparatu akatsei.':p>=50?'Ondo, baina praktikatu behar duzu oraindik.':'Segi lanean! Fusio-taula berrikusi.';
+  let wr=S.res.filter(r=>!r.ok);
+  let li=S.res.map((r,i)=>{
+    let lb=S.tipo==='fusioa'?(r.ex.p.split('_____')[0]||'').substring(0,42):r.ex.tx.substring(0,48);
+    if(r.ok)return`<div class="ei ei-ok">🟢 <span><b>${i+1}.</b> ${lb}... → "${esc(r.given)}" ✓</span></div>`;
+    return`<div class="ei ei-no">🔴 <span><b>${i+1}.</b> ${lb}...<br>Zuk: <span class="strike">${esc(r.given)}</span> | Zuzena: <b>${r.correct}</b></span></div>`;
+  }).join('');
+  let cb=wr.length?`<button class="btn btn-g" onclick="goCorr()">🔄 Akatsak zuzendu (${wr.length})</button>`:'';
+  A().innerHTML=`<h1>Emaitzak</h1><div class="card ctr"><div class="emoji">${em}</div>
+  <div class="sn">${p}%</div><p style="font-size:1.2rem;color:#a0a0a0;margin:8px 0">${ok} / ${t} zuzen</p>
+  <p style="color:#666;margin-bottom:25px">${ms}</p>
+  <div class="brow" style="justify-content:center;gap:10px">
+  ${cb}<button class="btn btn-p" onclick="go(S.tipo)">🔁 Berriz hasi</button>
+  <button class="btn btn-s" onclick="S.scr='txostena';R()">📋 Errore-txostena</button>
+  <button class="btn btn-s" onclick="S.scr='sarrera';R()">🏠 Hasierara</button></div></div>
+  <div class="card"><h3 style="color:#f39c12;margin-bottom:12px">Ariketa guztien laburpena</h3><div>${li}</div></div>`;
+}
+
+// === AKATSAK ZUZENDU ===
+function goCorr(){
+  S.corr=shuf(S.allRes.filter(r=>!r.ok).map(r=>({...r,prev:[r.given]})));
+  S.ci=0;S.ca={};S.cres=[];S.corr.forEach((_,i)=>S.ca[i]=0);
+  S.ans='';S.fb=null;S.helpOn=false;S.scr='zuzenketa';R();
+}
+function rC(){
+  if(S.ci>=S.corr.length){rCR();return}
+  let c=S.corr[S.ci],e=c.ex,at=S.ca[S.ci]||0,pr=S.ci/S.corr.length*100;
+  let isF=S.tipo==='fusioa';
+  let prevH=c.prev.map(w=>`<span class="strike">${esc(w)}</span>`).join(', ');
+  let qH;
+  if(isF){let p=e.p.split('_____');qH=`<p class="q">${p[0]}<span class="blank">${esc(S.ans)||'?'}</span>${p[1]||''}</p>`}
+  else{qH=`<p class="q"><b>❌ Esaldi okerra:</b><br><span style="color:#e74c3c">${e.tx}</span></p>`}
+  let fbH=S.fb?`<div class="fb ${S.fb.ok?'fb-ok':'fb-no'}"><b>${S.fb.msg}</b><br><span style="opacity:.8;font-size:.88rem">${e.l}</span></div>`:'';
+  let hlp=`<div class="help ${S.helpOn&&!S.fb?'show':''}">💡 ${e.l}</div>`;
+  let bH;
+  if(!S.fb){bH=`<div class="brow"><button class="btn btn-p" onclick="chkC()" ${!S.ans.trim()?'disabled':''}>✓ Egiaztatu</button>
+    <button class="btn btn-s" onclick="tglH()">💡 Laguntza</button></div>`}
+  else{let lb=S.ci<S.corr.length-1?'→ Hurrengoa':'🏁 Amaitu';
+    bH=`<div class="brow"><button class="btn btn-p" onclick="nxtC()">${lb}</button></div>`}
+  A().innerHTML=`<h1>🔄 Akatsak zuzentzen</h1>
+  <p class="sub">Ariketa ${S.ci+1} / ${S.corr.length} · Saiakera ${at+1}/3</p>
+  <div class="pbar"><div class="pfill" style="width:${pr}%"></div></div>
+  <div class="card"><span class="badge ${bc(e.m)}">${e.m}</span>
+  <div class="prev-wrong">Aurreko erantzunak: ${prevH}</div>
+  ${qH}
+  <input type="text" id="ai" value="${esc(S.ans)}" oninput="oI(this)" onkeydown="oKC(event)" placeholder="${isF?'Idatzi fusioa...':'Idatzi esaldi zuzena...'}" ${S.fb?'disabled':''}>
+  ${bH}${hlp}${fbH}</div>`;
+  if(!S.fb){let i=$('ai');if(i)i.focus()}
+}
+function oKC(ev){if(ev.key==='Enter'&&!S.fb&&S.ans.trim())chkC()}
+function chkC(){
+  if(!S.ans.trim()||S.fb)return;
+  let c=S.corr[S.ci],e=c.ex,cor=S.tipo==='fusioa'?e.e:e.ok;
+  let ok=norm(S.ans)===norm(cor);
+  S.ca[S.ci]=(S.ca[S.ci]||0)+1;
+  if(ok){
+    S.fb={ok:true,msg:'🎉 Orain bai! Ondo zuzenduta!'};
+    S.cres.push({ex:e,given:S.ans,correct:cor,ok:true,k:e.k});
+  }else if(S.ca[S.ci]>=3){
+    S.fb={ok:false,msg:`❌ 3 saiakera agortu dira. Zuzena: "${cor}"`};
+    S.cres.push({ex:e,given:S.ans,correct:cor,ok:false,k:e.k});
+  }else{
+    c.prev.push(S.ans);S.ans='';S.fb=null;
+    S.fb={ok:false,msg:`❌ Ez da zuzena. Saiatu berriz! (${3-S.ca[S.ci]} saiakera geratzen ${3-S.ca[S.ci]===1?'da':'dira'})`};
+    // Berriz saiatzeko, fb kendu pixka bat gero
+    let tmp=S.fb;
+    A().innerHTML='';rC();
+    // Feedback erakutsi baina input ireki
+    setTimeout(()=>{
+      S.fb=null;rC();
+    },2000);
+    return;
+  }
+  R();
+}
+function nxtC(){
+  if(S.ci<S.corr.length-1){S.ci++;S.ans='';S.fb=null;S.helpOn=false;R()}
+  else{
+    // Akatsak zuzenduta, allRes eguneratu
+    S.cres.forEach(cr=>{
+      let idx=S.allRes.findIndex(r=>r.ex===cr.ex&&!r.ok);
+      if(idx>=0)S.allRes[idx].ok=cr.ok;if(idx>=0)S.allRes[idx].given=cr.given;
+    });
+    S.res=S.allRes;S.scr='emaitzak';R();
+  }
+}
+function rCR(){S.scr='emaitzak';R()}
+
+// === TAULA ===
+function rT(){
+  let nH=T_NEAN.map(r=>`<tr><td style="font-weight:700;color:#f39c12">${r[0]}</td><td style="color:#3498db">${r[1]}</td></tr>`).join('');
+  let laH='';
+  for(let k in T_LA){
+    let rows=T_LA[k].map(r=>`<tr><td style="font-weight:700;color:#f39c12">${r[0]}</td><td style="color:#9b59b6">${r[1]}</td></tr>`).join('');
+    laH+=`<div class="tsec"><h3>${k}</h3><table><th>Forma</th><th>+ -(e)la</th>${rows}</table></div>`;
+  }
+  A().innerHTML=`<h1>Fusio-Taulak</h1><p class="sub">Laguntzailea + Menderagailua</p>
+  <div class="nav"><button class="btn btn-s" onclick="S.scr='sarrera';R()">← Itzuli</button>
+  <button class="btn on" onclick="go('fusioa')">Hasi ariketak</button></div>
+  <div class="card"><h3 style="color:#3498db;margin-bottom:12px">-(e)nean</h3>
+  <table><th>Laguntzailea</th><th>+ -(e)nean</th>${nH}</table></div>
+  <div class="card"><h3 style="color:#9b59b6;margin-bottom:12px">-(e)la (aditz trinkoak)</h3>${laH}</div>
+  <div class="card"><div class="rbox"><b>📌 Beste menderagailuak:</b><br><br>
+  <b>baino lehen, eta gero, ostean, orduko, baino arinago:</b> partizipioa + menderagailua (laguntzailerik gabe)<br>
+  <b>bitartean:</b> aditz burutugabea + laguntzailea + bitartean<br>
+  <b>ondoren / aurretik:</b> izena + -(r)en + ondoren/aurretik, edo aditza + ondoren/aurretik</div></div>`;
+}
+
+// === ERRORE-TXOSTENA ===
+function rX(){
+  let all=S.allRes||S.res,t=all.length,ok=all.filter(r=>r.ok).length,p=t?Math.round(ok/t*100):0;
+  let wrongs=all.filter(r=>!r.ok);
+  // Sailkatu kategoriaka
+  let cats={};wrongs.forEach(r=>{if(!cats[r.k])cats[r.k]=[];cats[r.k].push(r)});
+  let okCats=new Set(all.filter(r=>r.ok).map(r=>r.k));
+  // Errore-kaxak
+  let eH='';
+  for(let k in cats){
+    let cat=ERRKATS[k]||{iz:k,ar:''};
+    let mks=cats[k].map(r=>`<div class="mk">• <span class="strike">${esc(r.given)}</span> → <b>${r.correct}</b></div>`).join('');
+    eH+=`<div class="ebox"><h4>⚠️ ${cat.iz}</h4><div class="rl"><b>Araua:</b> ${cat.ar.replace(/\n/g,'<br>')}</div>${mks}</div>`;
+  }
+  // Ondo eginak
+  let okH='';
+  let okList=[...okCats].filter(k=>!cats[k]).map(k=>(ERRKATS[k]||{iz:k}).iz);
+  if(okList.length){okH=`<div class="obox"><b>✅ Dena zuzen egin duzu hauetan:</b><br>${okList.map(n=>'• '+n).join('<br>')}</div>`}
+  // Deskarga botoia
+  let dlBtn=wrongs.length?`<button class="btn btn-p" onclick="dl()">📥 Deskargatu txostena (.txt)</button>`:'';
+  A().innerHTML=`<h1>📋 Errore-txostena</h1>
+  <div class="card ctr"><div class="sn">${p}%</div><p style="color:#a0a0a0;margin:8px 0">${ok} / ${t} zuzen</p></div>
+  ${wrongs.length?`<div class="card"><h3 style="color:#e74c3c;margin-bottom:15px">⚠️ Erroreak eta nola ekidin</h3>${eH}${okH}</div>`
+  :`<div class="card ctr"><div class="emoji">🏆</div><p style="font-size:1.2rem">Zorionak! Ez duzu akatsik egin!</p></div>`}
+  <div class="card ctr"><div class="brow" style="justify-content:center">
+  ${dlBtn}<button class="btn btn-s" onclick="S.scr='sarrera';R()">🏠 Hasierara</button>
+  <button class="btn btn-s" onclick="go(S.tipo)">🔁 Berriz hasi</button></div></div>`;
+}
+
+// === DESKARGA ===
+function dl(){
+  let all=S.allRes||S.res,t=all.length,ok=all.filter(r=>r.ok).length,p=t?Math.round(ok/t*100):0;
+  let wr=all.filter(r=>!r.ok);
+  let cats={};wr.forEach(r=>{if(!cats[r.k])cats[r.k]=[];cats[r.k].push(r)});
+  let okCats=[...new Set(all.filter(r=>r.ok).map(r=>r.k))].filter(k=>!cats[k]).map(k=>(ERRKATS[k]||{iz:k}).iz);
+  let d=new Date(),ds=d.toLocaleDateString('eu-ES');
+  let txt=`========================================\nDENBORAZKO PERPAUSAK — ERRORE-TXOSTENA\nData: ${ds}\n========================================\n\nPUNTUAZIOA: ${ok}/${t} (${p}%)\n`;
+  txt+=`\n----------------------------------------\n⚠️ ERROREAK ETA NOLA EKIDIN\n----------------------------------------\n`;
+  let n=1;
+  for(let k in cats){
+    let cat=ERRKATS[k]||{iz:k,ar:''};
+    txt+=`\n${n}. ${cat.iz.toUpperCase()}\n   Araua: ${cat.ar}\n\n   Zure akatsak:\n`;
+    cats[k].forEach(r=>{txt+=`   - "${r.given}" → ${r.correct}\n`});
+    n++;
+  }
+  if(okCats.length){
+    txt+=`\n----------------------------------------\nDENA ZUZEN EGIN DUZU HAUETAN:\n`;
+    okCats.forEach(n=>{txt+=`- ${n}\n`});
+  }
+  txt+=`\n----------------------------------------\nSegi praktikatzen! 💪\n`;
+  let blob=new Blob([txt],{type:'text/plain;charset=utf-8'});
+  let a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download=`errore-txostena_${ds.replace(/\//g,'-')}.txt`;a.click();
+}
+
+// === INIT ===
+R();
+</script>
+</body>
+</html>
